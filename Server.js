@@ -12,7 +12,7 @@ const cors = require('cors');
 const app = express()
 const http = require('http');
 const server = http.createServer(app);
-const port = 3000;
+const port = process.env.PORT || 3000;
 const { Server } = require("socket.io");
 const io = new Server(server, {cors: {
   origin: "http://localhost:3001",
@@ -35,10 +35,10 @@ mongoose.connect(DB, {
 });
 
 
-app.use(express.static(path.join(__dirname,'./client/build')));
-app.get("*",(req,res)=>{
-  res.sendFile(path.join(__dirname,"./client/build/index.html"));
-})
+// app.use(express.static(path.join(__dirname,'./client/build')));
+// app.get("*",(req,res)=>{
+//   res.sendFile(path.join(__dirname,"./client/build/index.html"));
+// })
 
 app.get('/api/socket',middlewar, async(req,res)=>{
   const CurrentUser = req.CurrentUser;
@@ -360,6 +360,6 @@ async function middlewar(req,res,next){
 
 
 
-server.listen(port, () => {
+app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
