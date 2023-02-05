@@ -40,7 +40,7 @@ mongoose.connect(DB, {
 //   res.sendFile(path.join(__dirname,"./client/build/index.html"));
 // })
 
-app.get('/api/socket',middlewar, async(req,res)=>{
+app.get('/socket',middlewar, async(req,res)=>{
   const CurrentUser = req.CurrentUser;
   // const userEmail = "7phussain@gmail.com";
 
@@ -102,7 +102,7 @@ app.get('/api/socket',middlewar, async(req,res)=>{
 
 
 
-app.get('/api/contactApi',middlewar, async (req, res) => {
+app.get('/contactApi',middlewar, async (req, res) => {
   const CurrentUser = req.CurrentUser;
   // console.log("This is Curren User"+CurrentUser)
   let currentUser = await User.findOne({ userEmail: CurrentUser.userEmail});
@@ -114,7 +114,7 @@ app.get('/api/contactApi',middlewar, async (req, res) => {
 
 
 
-app.get("/api/messageServer",middlewar, async (req, res) => {
+app.get("/messageServer",middlewar, async (req, res) => {
   const CurrentUser = req.CurrentUser;
   const user = await User.findOne({ userEmail: CurrentUser.userEmail});
   const chatIdes = user.userContacts.map((value) => {
@@ -143,7 +143,7 @@ app.get('/userServer',middlewar,(req,res)=>{
 
 
 
-app.post("/api/loginForm", async(req,res)=>{
+app.post("/loginForm", async(req,res)=>{
   const { userEmail, userPassword } = req.body;
   console.log(req.body)
   const auth = await User.findOne({ $and: [{ userEmail: userEmail }, { userPassword: userPassword }] });
@@ -183,7 +183,7 @@ app.get("/app",middlewar,(req,res)=>{
   }
 })
 
-app.post("/api/form",middlewar,async(req,res)=>{
+app.post("/form",middlewar,async(req,res)=>{
   const CurrentUser = req.CurrentUser;
   const body = req.body
 
@@ -215,7 +215,7 @@ app.post("/api/form",middlewar,async(req,res)=>{
   res.status(200).json({ data: `${body}` })
 })
 
-app.post("/api/addContactApi",middlewar,async(req,res)=>{
+app.post("/addContactApi",middlewar,async(req,res)=>{
   const CurrentUser = req.CurrentUser;
   const { contactName, contactEmail } = req.body;
 
@@ -296,7 +296,7 @@ currentUser = await Message.findOne({ $and: [{$or:[{ user1: CurrentUser.userEmai
 })
 
 
-app.post("/api/signUpForm",async(req,res)=>{
+app.post("/signUpForm",async(req,res)=>{
   const { userName, userEmail, userPassword } = req.body;
     if (!userName || !userEmail || !userPassword) {
         // console.log(req.body)
