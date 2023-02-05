@@ -102,10 +102,10 @@ app.get('/socket',middlewar, async(req,res)=>{
 
 
 
-app.get('/contactApi',middlewar, async (req, res) => {
-  const CurrentUser = req.CurrentUser;
+app.get('/contactApi', async (req, res) => {
+//   const CurrentUser = req.CurrentUser;
   // console.log("This is Curren User"+CurrentUser)
-  let currentUser = await User.findOne({ userEmail: CurrentUser.userEmail});
+  let currentUser = await User.findOne({ userEmail: "7phussain@gmail.com"});
 
   res.status(200).json(currentUser.userContacts);
 })
