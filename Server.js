@@ -163,7 +163,7 @@ app.post("/loginForm", async(req,res)=>{
 
       console.log(token);
 
-      res.cookie("liveChatToken",token); 
+     await res.cookie("liveChatToken",token); 
 
       res.status(200).json({token});
 
